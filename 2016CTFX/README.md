@@ -30,7 +30,7 @@ for index in range(100):
 > 
 >  - According to the ciphertext, it seems to be encrypted by **substiution**.(I swear, I do not understand what the python code doing.)
 
-Umm...maybe we can just encrypt it again and again, the result of this encryption might be a circlic chain.
+Umm...maybe we can just encrypt it again and again, the result of this encryption might be a cyclical chain.
 I make another similar python program to deal with it.
 
 ```
