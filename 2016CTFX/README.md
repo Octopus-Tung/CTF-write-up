@@ -50,21 +50,21 @@ grep -e 'ctf(' result
 ```
 
 Output : 
-> ctf(1m@db4_1nsnAt1_y_h3asElp3pl_m3)
-> ctf(1@mbd4_1nsAn1ty__p3asEh_3lplm3)
-> ctf(1m@db4_1nsnAt1_yl_3asEp_3plhm3)
-> ctf(1@mbd4_1nsAn1ty_h_3asE_l3lppm3)
-> ctf(1m@db4_1nsnAt1_ypl3asE_h3pl_m3)
-> ctf(1@mbd4_1nsAn1ty__h3asElp3lp_m3)
-> ctf(1m@db4_1nsnAt1_y_p3asEh_3pllm3)
-> ctf(1@mbd4_1nsAn1ty_l_3asEp_3lphm3)
-> ctf(1m@db4_1nsnAt1_yh_3asE_l3plpm3)
-> **ctf(1@mbd4_1nsAn1ty_pl3asE_h3lp_m3)** <--true flag
-> ctf(1m@db4_1nsnAt1_y_h3asElp3pl_m3)
-> ctf(1@mbd4_1nsAn1ty__p3asEh_3lplm3)
-> ctf(1m@db4_1nsnAt1_yl_3asEp_3plhm3)
-> ctf(1@mbd4_1nsAn1ty_h_3asE_l3lppm3)
-> ctf(1m@db4_1nsnAt1_ypl3asE_h3pl_m3)
-> ctf(1@mbd4_1nsAn1ty__h3asElp3lp_m3)
+>ctf(1m@db4_1nsnAt1_y_h3asElp3pl_m3)
+ctf(1@mbd4_1nsAn1ty__p3asEh_3lplm3)
+ctf(1m@db4_1nsnAt1_yl_3asEp_3plhm3)
+ctf(1@mbd4_1nsAn1ty_h_3asE_l3lppm3)
+ctf(1m@db4_1nsnAt1_ypl3asE_h3pl_m3)
+ctf(1@mbd4_1nsAn1ty__h3asElp3lp_m3)
+ctf(1m@db4_1nsnAt1_y_p3asEh_3pllm3)
+ctf(1@mbd4_1nsAn1ty_l_3asEp_3lphm3)
+ctf(1m@db4_1nsnAt1_yh_3asE_l3plpm3)
+***ctf(1@mbd4_1nsAn1ty_pl3asE_h3lp_m3)*** 
+ctf(1m@db4_1nsnAt1_y_h3asElp3pl_m3)
+ctf(1@mbd4_1nsAn1ty__p3asEh_3lplm3)
+ctf(1m@db4_1nsnAt1_yl_3asEp_3plhm3)
+ctf(1@mbd4_1nsAn1ty_h_3asE_l3lppm3)
+ctf(1m@db4_1nsnAt1_ypl3asE_h3pl_m3)
+ctf(1@mbd4_1nsAn1ty__h3asElp3lp_m3)
 
 
