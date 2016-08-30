@@ -6,9 +6,9 @@ Just finish two challenge, **crash** in forensics and **lambda** in crypto.
 crash
 -------------
 
-At first, the given file is **flag.zip**.
-unzip it, and get **flag.txt** in **flag/**.
-Open it with vim, it show up some message about **flag.txt.swp**.
+At first, the given file is **flag.zip**.<br>
+unzip it, and get **flag.txt** in **flag/**.<br>
+Open it with vim, it show up some message about **flag.txt.swp**.<br>
 Recover it.
 
 ![flag](http://i.imgur.com/MaI7SfQ.png)
@@ -30,7 +30,7 @@ for index in range(100):
 > 
 >  - According to the ciphertext, it seems to be encrypted by **substiution**.(I swear, I do not understand what the python code doing.)
 
-Umm...maybe we can just encrypt it again and again, the result of this encryption might be a cyclical chain.
+Umm...maybe we can just encrypt it again and again, the result of this encryption might be a cyclical chain.<br>
 I make another similar python program to deal with it.
 
 ```
