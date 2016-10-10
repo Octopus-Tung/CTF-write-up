@@ -28,7 +28,7 @@ for index in range(100):
 
 > **Note:**
 > 
->  - According to the ciphertext, it seems to be encrypted by **substiution**.(I swear, I do not understand what the python code doing.)
+>  - According to the ciphertext, it seems to be encrypted by **permutation**.(I swear, I do not understand what the python code doing.)
 
 Umm...maybe we can just encrypt it again and again, the result of this encryption might be a cyclical chain.<br>
 I make another similar python program to deal with it.
