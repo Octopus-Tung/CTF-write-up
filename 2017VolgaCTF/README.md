@@ -8,6 +8,7 @@ keypass
 檔案：flag.zip.enc、keypass
 
 首先逆向keypass得知輸出結果不會超出256組
+
 其程式以python改寫為keypass.py
 
 ```
@@ -36,6 +37,7 @@ print result
 ```
 
 其256組輸出被我紀錄於strong_keys中
+
 再寫一支python程式decrypt.py暴力破解
 
 ```
