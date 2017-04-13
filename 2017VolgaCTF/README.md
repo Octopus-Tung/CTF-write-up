@@ -3,9 +3,9 @@ Volga CTF Write-up
 keypass
 ---
 
-題目敘述：For reasons unknown an amature cryptographer wrote an application to generate “strong encryption keys”. One of these keys was used to encrypt a tar archive with the flag. They used openssl command line util with -aes-128-cbc. Could you please get the flag? It shouldn’t take much time…
+>題目敘述：For reasons unknown an amature cryptographer wrote an application to generate “strong encryption keys”. One of these keys was used to encrypt a tar archive with the flag. They used openssl command line util with -aes-128-cbc. Could you please get the flag? It shouldn’t take much time…
 
-檔案：flag.zip.enc、keypass
+>檔案：flag.zip.enc、keypass
 
 首先逆向keypass得知輸出結果不會超出256組
 
