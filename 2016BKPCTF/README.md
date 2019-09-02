@@ -1,8 +1,8 @@
-#Bosten Key Party CTF Write-up
+# Bosten Key Party CTF Write-up
 
 Well, it's my first time to play CTF, and I just soluted des-ofb in crypto.
 
-###des-ofb
+### des-ofb
 
 At first, there are two given files, **des-ofb.py** and **ciphertext**.
 

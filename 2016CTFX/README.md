@@ -1,5 +1,6 @@
 CTF(x) Write-up
-===================
+
+---
 
 Just finish two challenge, **crash** in forensics and **lambda** in crypto.
 
