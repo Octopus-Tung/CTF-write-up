@@ -11,9 +11,9 @@ reverse: Easy_Crack_Me
 ## nothing more to say
 
 >Japan is fucking hot.
-
-nc nothing.chal.ctf.westerns.tokyo 10001
-
+>
+>nc nothing.chal.ctf.westerns.tokyo 10001
+>
 >File: warmup.c, warmup
 
 題目直接提示沒有canary、NX、PIE，不過ASLR估計還是有
@@ -118,7 +118,7 @@ r.close()
 ## Easy Crack Me
 
 >Cracking is easy for you.
-
+>
 >File: easy_crack_me
 
 經典題，餵flag給程式求flag，flag正確會輸出Correct，反之incorrect
