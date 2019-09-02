@@ -1,7 +1,9 @@
 # TokyoWesterns CTF writeup
 
 solved:
+
 pwn: nothing more to say
+
 reverse: Easy_Crack_Me
 
 ---
@@ -9,6 +11,7 @@ reverse: Easy_Crack_Me
 ## nothing more to say
 
 >Japan is fucking hot.
+
 nc nothing.chal.ctf.westerns.tokyo 10001
 
 >File: warmup.c, warmup
@@ -35,10 +38,15 @@ int main(void) {
     return 0;
 }
 ```
+
 overflow的點是gets()，不用找了 ヽ(●´∀`●)ﾉ
+
 看起來是要做shellcode injection，不過有ASLR，要跳到buf[]裡有點難
+
 ROP gadgets也不夠直接做system("/bin/sh")
+
 用ROP把shellcode寫到.bss section？那個setbuf()看起來就很可疑XD
+
 不過我後來不是用這方法打就是了 ∑(￣□￣;)
 
 看一下main()的asm：
@@ -65,12 +73,17 @@ ROP gadgets也不夠直接做system("/bin/sh")
 ```
 
 buf[]的位置可以靠rdp來改啊XD
+
 >4006db: lea rax,[rbp-0x100]
 
 先送一次payload把buf[]改到.bss上然後跳到0x4006db再撿一次gets()
+
 第二次才上shellcode然後跳去.bss執行
+
 然後要注意一下printf()也會吃buf[]的位置，payload要調一下
+
 我是直接餵前面puts()的字串給他啦，第二次payload最前面放0x400798
+
 直接從頭放shellcoe的話，printf()會爛掉 (´_ゝ`)
 
 exploit：
@@ -109,12 +122,18 @@ r.close()
 >File: easy_crack_me
 
 經典題，餵flag給程式求flag，flag正確會輸出Correct，反之incorrect
+
 總之，先丟ida或ghidra，不過都會有點跑掉
+
 用objdump會發現沒有_start和__libc_csu_init之類的，應該是link那部分有調
+
 不過ida和ghidra爬一下string去找到Correct之後
+
 追回ref的位址基本上就可以...按F5了 ε٩(๑> ₃ <)۶з
 
+
 reverse.c是ghidra decompile過的code，不過全貼太多了，拆開來寫好了
+
 這段是確認flag長度==39，然後頭尾是 'TWCTF{' 和 '}'
 ```c=
 if (iParm1 == 2) {
@@ -131,7 +150,9 @@ if (iParm1 == 2) {
     }
 ```
 這段會檢查'0'\~'9'和'a'\~'f'分別在flag中出現幾次，然後去和0x400f00~0x400f40所記錄的次數比對
+
 這邊可以發現0x400f00\~0x400f40裡次數總合為32，剛好是flag去掉'TWCTF{','}'的長度
+
 所以flag的內容都是'0'\~'9'和'a'\~'f'啦\~
 ```c=
 local_28 = 0x3736353433323130;
@@ -151,7 +172,9 @@ if (iVar2 != 0) {
 }
 ```
 稍微改一下變數名，不然有點難看
+
 這段是將flag的內容('{''}'裡的內容)依順序以4個字元為一組，分別做連加和連續XOR
+
 然後分別和0x400f40\~0x400f60,0x400f60\~0x400f80所紀錄的計算結果比對
 ```c=
 while (i < 8) {
@@ -175,6 +198,7 @@ while (i < 8) {
 }
 ```
 這邊跟上面差不多，不過每組不是依序的4個
+
 而是每隔8個一組，比如: (1st, 9th, 17th, 25th), (2nd, 10th, 18th, 26th), ...
 ```c=
 while (i < 8) {
@@ -197,6 +221,7 @@ if ((iVar2 != 0) || (iVar2 = memcmp(&local_108,&DAT_00400f80,0x20), iVar2 != 0))
 }
 ```
 這段可以當成提示'{''}'中哪些位置是放字母，哪些是放數字
+
 0x400fc0\~0x401040裡會紀錄對應到字母的是0x80, 數字是0xff
 ```c=
 while (local_194 < 0x20) {
@@ -240,12 +265,19 @@ if ((((__s[0x25] != '5') || (__s[7] != 'f')) || (__s[0xb] != '8')) || (((__s[0xc
 ```
 
 然後，算數學?! Σ(ﾟДﾟ；≡；ﾟдﾟ)
+
 開玩笑的，用z3幫忙算吧！(ﾟ3ﾟ)～♪
+
 比較特別的是這裡Int不能做XOR，所以要用BitVec
+
 然後就是把剛剛逆向的內容寫成z3 solver的限制式
+
 不過因為我沒有完全寫上去(字元出現次數不知道要怎麼寫成限制式QAQ)
+
 所以會出現多組解的情況，不過z3只會算出一組符合的解
+
 這邊可以用**否定原先的解**當新的限制式給solver
+
 這樣就可以算出所有解啦｡:.ﾟヽ(*´∀`)ﾉﾟ.:｡
 ```python=
 from z3 import *
