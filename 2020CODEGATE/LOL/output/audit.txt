@@ -1,0 +1,31 @@
+Foremost version 1.5.7 by Jesse Kornblum, Kris Kendall, and Nick Mikus
+Audit File
+
+Foremost started at Fri Feb  7 23:10:10 2020
+Invocation: foremost Legend.gif 
+Output directory: /root/Desktop/codegate2020/LOL/output
+Configuration file: /etc/foremost.conf
+------------------------------------------------------------------
+File: Legend.gif
+Start: Fri Feb  7 23:10:10 2020
+Length: 856 KB (877076 bytes)
+ 
+Num	 Name (bs=512)	       Size	 File Offset	 Comment 
+
+0:	00000000.jpg 	      89 KB 	          0 	 
+1:	00000178.jpg 	      90 KB 	      91345 	 
+2:	00000358.jpg 	     107 KB 	     183730 	 
+3:	00000573.jpg 	     107 KB 	     293597 	 
+4:	00000789.jpg 	     102 KB 	     404067 	 
+5:	00000993.jpg 	      93 KB 	     508909 	 
+6:	00001181.jpg 	      81 KB 	     605001 	 
+7:	00001344.jpg 	      82 KB 	     688620 	 
+8:	00001509.jpg 	     101 KB 	     772953 	 
+Finish: Fri Feb  7 23:10:10 2020
+
+9 FILES EXTRACTED
+	
+jpg:= 9
+------------------------------------------------------------------
+
+Foremost finished at Fri Feb  7 23:10:10 2020
