@@ -2,12 +2,12 @@
 
 bof
 -------
->nc binary.utctf.live 9002
+>nc binary.utctf.live 9002  
 file: pwnable
 
 pwnable: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=017761d89d9e70fa132c5dca9e2de20a44672698, not stripped  
 反編譯發現main()中的gets()導致buffer overflow  
-```C=
+```c
 undefinded8 main(){
     char *s;
     
@@ -18,7 +18,7 @@ undefinded8 main(){
 }
 ```
 另有一個get_flag()可以開sh  
-```C=
+```c
 void get_flag(uint32_t arg1){
     uint32_t var_14h;
     char *var_10h;
@@ -35,9 +35,10 @@ void get_flag(uint32_t arg1){
 因為是x86-64，要有可以改rdi的gadget  
 也可以直接蓋ret addr到var_10h = "/bin/sh"跳過if判斷  
 不過會因為overflow的關係導致rbp在main末期執行leave時爛掉  
+![](./bof/bof.png)  
 執行var_10h = "/bin/sh"會segment fault  
 可以把stack裡的saved rbp蓋成可控的位址，比如.bss  
-```python=
+```py
 from pwn import *
 
 r = remote('binary.utctf.live', 9002)
@@ -57,7 +58,7 @@ utflag{thanks_for_the_string_!!!!!!}
 do not stop
 -----
 
->One of my servers was compromised, but I can't figure it out. See if you can solve it for me!
+>One of my servers was compromised, but I can't figure it out. See if you can solve it for me!  
 file: capture.pcap
 
 在DNS query/response中發現有base64 encoding的字串  
@@ -77,7 +78,7 @@ replay卻沒反應，不過可以注意到更前面的DNS封包
 ```
 推測可能換IP，可以重新query一次發現確實有換過  
 送出的command要記得加Cg==，RR也要使用TXT  
-```python=
+```py
 #!/usr/bin/env python
 
 import dns.resolver
@@ -105,27 +106,27 @@ utflag{\$al1y_s3L1S_sE4_dN\$}
 
 [basics] reverse engineering
 -----
->I know there's a string in this binary somewhere.... Now where did I leave it?
+>I know there's a string in this binary somewhere.... Now where did I leave it?  
 file: calc
 
-```shell=
+```sh
 strings calc | grep utflag
 ```
 utflag{str1ngs_1s_y0ur_fr13nd}
 
 [basics] forensics
 -----
->My friend said they hid a flag in this picture, but it's broken! Now that I think about it, I don't even know if it really is a picture...
+>My friend said they hid a flag in this picture, but it's broken! Now that I think about it, I don't even know if it really is a picture...  
 file: secret.jpeg
 
-```shell=
+```sh
 strings secret.jpeg | grep utflag
 ```
 utflag{fil3_ext3nsi0ns_4r3nt_r34l}
 
 Zero
 -----
->This file seems to be too large given how much text it contains, but I can find zero evidence of the flag. Maybe you'll have better luck than me?
+>This file seems to be too large given how much text it contains, but I can find zero evidence of the flag. Maybe you'll have better luck than me?  
 file: zero.text
 
 先確定有哪些unicode出現：  
