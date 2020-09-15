@@ -1,7 +1,5 @@
 # CSAW CTF Quals 2020
 
-[TOC]
-
 ### rev 50: baby_mult
 > Welcome to reversing! Prove your worth and get the flag from this neat little program!  
 > file: program.txt  
@@ -23,11 +21,11 @@
 印出來的是反序的 flag: }m4rg0rp_d1l4v_r3pus{galf  
 然後沒有正常結束，所以 segment fault 了XDD  
 
-> flag{sup3r_v4l1d_pr0gr4m}
+> flag{sup3r_v4l1d_pr0gr4m}  
 
 ### rev 100: ezbreezy
-> This binary has nothing to hide!
-> file: app
+> This binary has nothing to hide!  
+> file: app  
 
 ghidra 沒解出來...，Ida 加一分XDD  
 其實用 objdump 很容易就發現問題了∑(￣□￣;)  
@@ -70,12 +68,12 @@ objdump -dMintel app | grep '^  800' | grep 'mov    BYTE PTR \[rbp.0x' | awk -F,
 然後就用 [solution.py](./rev/ezbreezy/solution.py) 解出 flag   
 嗯... 就... 轉 byte 減 40，突然覺得可能就減了，還真是 flag ...  
 
-> flag{u_h4v3_r3c0v3r3d_m3}
+> flag{u_h4v3_r3c0v3r3d_m3}  
 
 ### rev 150: not_malware
-> To be perfectly frank, I do some malware-y things, but that doesn't mean that I'm actually malware, I promise!
-> nc rev.chal.csaw.io 5008
-> file: not_malware
+> To be perfectly frank, I do some malware-y things, but that doesn't mean that I'm actually malware, I promise!  
+> nc rev.chal.csaw.io 5008  
+> file: not_malware  
 
 好想寫說單純逆向得解啊_(¦3」∠)_  
 這題貌似有一些反分析之類的，我 patch 掉 function call 成 nop : not_malware_patch  
@@ -84,7 +82,7 @@ objdump -dMintel app | grep '^  800' | grep 'mov    BYTE PTR \[rbp.0x' | awk -F,
 * offset 0x1229 在讀 flag.txt，caller 是 offset 0x12bc
 * 然後輸入啊，條件啊，主要的 control flow 都在這裡了
 
-大致逆出來的條件是: 
+大致逆出來的條件是:  
 1. len(input) < 60
 1. input[:8] 'softbank'
 1. input[8] = input[12] = input[33] = ':'
@@ -97,7 +95,7 @@ objdump -dMintel app | grep '^  800' | grep 'mov    BYTE PTR \[rbp.0x' | awk -F,
 
 看起來好麻煩ಠ_ಠ  
 條件7很麻煩，乾脆就~~假設~~可以控制成全部的值都一樣好了  
-條件7如下，這是其中一部分 :
+條件7如下，這是其中一部分 :  
 ```asm=
 if ((char)var_a0h != (char)var_80h) {exit(1);}
 if ((char)var_90h != (char)var_70h) {exit(1);}
@@ -126,7 +124,7 @@ seed 不變，這樣設定 rbp-0x80 那 20 bytes 就都一樣
 最後可以總結一下 input = 'softbank:000:11111111111111111111:end'  
 [solution.py](./rev/not_malware/solution.py) 只是送 payload  
 
-> flag{th4x_f0r_ur_cr3d1t_c4rd}
+> flag{th4x_f0r_ur_cr3d1t_c4rd}  
 
 ### crypto 50: Perfect Secrecy
 > Alice sent over a couple of images with sensitive information to Bob, encrypted with a pre-shared key. It is the most secure encryption scheme, theoretically...
@@ -136,13 +134,13 @@ stegsolver 拿到 ZmxhZ3swbjNfdDFtM19QQGQhfQ==
 b64 decode  
 完(ㆆᴗㆆ)  
 
-> flag{0n3_t1m3_P@d!}
+> flag{0n3_t1m3_P@d!}  
 
 ### crypto 100: modus_operandi
-> Can't play CSAW without your favorite block cipher!
-> nc crypto.chal.csaw.io 5001
+> Can't play CSAW without your favorite block cipher!  
+> nc crypto.chal.csaw.io 5001  
 
-nc 過去如下:
+nc 過去如下:  
 
 ```txt=
 Hello! For each plaintext you enter, find out if the block cipher used is ECB or CBC. Enter "ECB" or "CBC" to get the flag!
@@ -151,7 +149,7 @@ Enter plaintext:
 
 這題要猜 mode  
 概念很簡單，如果2個 plain block 對應的 cipher block 一樣 -> ECB  
-舉個栗子 :
+舉個栗子 :  
 ```
 假設一個 block 就 4 個 char 好了，比較簡單
 plaintext = 01230123 ---加密---> ciphertext = 12341234
@@ -169,9 +167,9 @@ plaintext = 01230123 ---加密---> ciphertext = 12349487
 > flag{ECB_re@lly_sUck\$}
 
 ### pwn 50: roppity
-> Welcome to pwn!
-> nc pwn.chal.csaw.io 5016
-> file: rop, libc-2.27.so
+> Welcome to pwn!  
+> nc pwn.chal.csaw.io 5016  
+> file: rop, libc-2.27.so  
 
 ROP 就...公式解啊~~  
 先猜有 ASLR -> leak puts()的 GOT -> 要送2次 payload -> 要再回 main() 拿 gets()  
@@ -192,12 +190,12 @@ payload = padding + p64(base + one_gadget) + b'\x00' * 0x45
 
 細節在 [solution.py](./pwn/roppity/solution.py)  
 
-> flag{r0p_4ft3r_r0p_4ft3R_r0p}
+> flag{r0p_4ft3r_r0p_4ft3R_r0p}  
 
 ### pwn 100: slithery
-> Setting up a new coding environment for my data science students. Some of them are l33t h4ck3rs that got RCE and crashed my machine a few times :(. Can you help test this before I use it for my class? Two sandboxes should be better than one...
-> nc pwn.chal.csaw.io 5011
-> file: sandbox.py
+> Setting up a new coding environment for my data science students. Some of them are l33t h4ck3rs that got RCE and crashed my machine a few times :(. Can you help test this before I use it for my class? Two sandboxes should be better than one...  
+> nc pwn.chal.csaw.io 5011  
+> file: sandbox.py  
 
 這題其實 sanbox.py 會幫你 import numpy(可以 print RMbPOQHCzt 得知)  
 numpy.load() 有反序列化的洞，是用 pickle.load 實作的  
@@ -215,6 +213,6 @@ class exploit(object):
 kimji = pickle.dumps(exploit())
 payload = 'RMbPOQHCzt.loads(HrjYMvtxwA(%s))' % base64.b64encode(kimji)
 ```
-具體細節在 [solution.py](./pwn/slithery/solution.py)
+具體細節在 [solution.py](./pwn/slithery/solution.py)  
 
-> flag{y4_sl1th3r3d_0ut}
+> flag{y4_sl1th3r3d_0ut}  
